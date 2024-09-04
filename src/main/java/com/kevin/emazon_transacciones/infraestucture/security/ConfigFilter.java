@@ -1,6 +1,7 @@
 package com.kevin.emazon_transacciones.infraestucture.security;
 
 import com.kevin.emazon_transacciones.infraestucture.security.filter.JwtAuthorizationFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -14,6 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true)
+@RequiredArgsConstructor
 public class ConfigFilter {
 
     private static final String AUX_BODEGA_VALUE = "AUX_BODEGA";
@@ -23,7 +25,7 @@ public class ConfigFilter {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("api/v1/supply/new/**").hasRole(AUX_BODEGA_VALUE)
+                        .requestMatchers("**").hasRole(AUX_BODEGA_VALUE)
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)

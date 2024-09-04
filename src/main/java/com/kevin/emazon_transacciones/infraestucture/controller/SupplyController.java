@@ -1,12 +1,11 @@
 package com.kevin.emazon_transacciones.infraestucture.controller;
 
+import com.kevin.emazon_transacciones.application.dto.SupplyDto;
 import com.kevin.emazon_transacciones.application.handler.ISupplyHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -16,9 +15,9 @@ public class SupplyController {
     private static final String CREATE_SUPPLY_MESSAGE = "Ha accedido al método createNewSupply";
     private final ISupplyHandler supplyHandler;
 
-    @GetMapping("/new")
+    @PostMapping("/new")
     @Secured(ROLE_AUX_BODEGA)
-    public ResponseEntity<String> createNewSupply(){
+    public ResponseEntity<String> createNewSupply(@RequestBody SupplyDto supplyDto){
         return ResponseEntity.status(200).body(CREATE_SUPPLY_MESSAGE);
     }
 }
