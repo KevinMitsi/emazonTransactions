@@ -28,10 +28,10 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     public static final String USERNAME_KEY = "username";
     public static final String ROLE_KEY = "role";
     public static final String EXPIRED_TOKEN_MESSAGE = "Token expirado";
-    public static final String INVALID_TOKEN_MESSAGE = "Token inválido";
+    public static final String INVALID_TOKEN_MESSAGE = "Token invalido";
     public static final String SECURITY_ROLE_BASE = "ROLE_";
     public static final String EMPTY_STRING = "";
-    public static final String ID_KEY = "id";
+    public static final String ID_KEY = "id_user";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -52,7 +52,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
                 String username = claims.get(USERNAME_KEY, String.class);
                 String roleFromToken = claims.get(ROLE_KEY, String.class);
-                String idFromToken = claims.get(ID_KEY, String.class);
+                Long idFromToken = claims.get(ID_KEY, Long.class);
 
                 if (validateToken(claims)) {
                     UserDetails userDetails = loadUserDetails(username, roleFromToken);
