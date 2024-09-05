@@ -2,6 +2,7 @@ package com.kevin.emazon_transacciones.application.dto;
 
 
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class SupplyDto {
 
     private static final String NULL_ITEM_ID_MESSAGE = "El Id del Item no puede ser null";
