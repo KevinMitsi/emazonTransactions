@@ -10,11 +10,11 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class SupplyEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+public class SaleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,6 +29,4 @@ public class SupplyEntity {
 
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
-
-
 }

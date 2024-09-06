@@ -1,7 +1,12 @@
 package com.kevin.emazon_transacciones.domain.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Setter
+@Getter
 public class Supply {
     private Long id;
 
@@ -23,51 +28,4 @@ public class Supply {
         this.price = price;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
-    }
-
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
-
-    public Date getSupplyDate() {
-        return supplyDate;
-    }
-
-    public void setSupplyDate(Date supplyDate) {
-        this.supplyDate = supplyDate;
-    }
-
-    public Long getWareHouseWorkerId() {
-        return wareHouseWorkerId;
-    }
-
-    public void setWareHouseWorkerId(Long wareHouseWorkerId) {
-        this.wareHouseWorkerId = wareHouseWorkerId;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
 }
