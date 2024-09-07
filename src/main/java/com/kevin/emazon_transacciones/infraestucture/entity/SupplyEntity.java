@@ -1,6 +1,5 @@
 package com.kevin.emazon_transacciones.infraestucture.entity;
 
-import com.kevin.emazon_transacciones.domain.model.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,16 +18,14 @@ public class SupplyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;
-
     private Long itemId;
 
-    private Date saleDate;
+    private Long quantity;
+
+    private Date supplyDate;
+
+    private Long wareHouseWorkerId;
 
     private Double price;
-
-    @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
-
 
 }
