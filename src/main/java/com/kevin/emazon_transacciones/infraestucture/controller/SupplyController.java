@@ -2,15 +2,18 @@ package com.kevin.emazon_transacciones.infraestucture.controller;
 
 import com.kevin.emazon_transacciones.application.dto.SupplyDto;
 import com.kevin.emazon_transacciones.application.handler.ISupplyHandler;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Setter
+@Validated
 @RequiredArgsConstructor
 @RequestMapping("api/v1/supply")
 public class SupplyController {
@@ -21,7 +24,7 @@ public class SupplyController {
 
     @PostMapping("/new")
     @Secured(ROLE_AUX_BODEGA)
-    public ResponseEntity<String> createNewSupply(@RequestBody SupplyDto supplyDto){
+    public ResponseEntity<String> createNewSupply(@Valid @RequestBody SupplyDto supplyDto){
         supplyDto.setWareHouseWorkerId((Long) SecurityContextHolder.getContext().getAuthentication().getDetails());
         supplyHandler.createSupply(supplyDto);
         return ResponseEntity.status(200).body(CREATE_SUPPLY_MESSAGE + supplyDto.getItemId());
