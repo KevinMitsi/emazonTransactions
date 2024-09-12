@@ -31,8 +31,8 @@ public class SupplyController {
         supplyHandler.createSupply(supplyDto);
         return ResponseEntity.status(200).body(CREATE_SUPPLY_MESSAGE + supplyDto.getItemId());
     }
-    @GetMapping("supplyDate/{id}")
+    @GetMapping("/supplyDate/{id}")
     public Date getSupplyItemDate(@PathVariable Long id){
-        return null;
+        return supplyHandler.getNextSupplyDateFromItemId(id);
     }
 }
