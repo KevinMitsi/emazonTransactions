@@ -8,6 +8,9 @@ import com.kevin.emazon_transacciones.infraestucture.repository.SupplyRepository
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+import java.util.Optional;
+
 @Repository
 @AllArgsConstructor
 public class JpaSupplyAdapter implements ISupplyPersistentPort {
@@ -17,5 +20,10 @@ public class JpaSupplyAdapter implements ISupplyPersistentPort {
     public void createSupply(Supply supply) {
         SupplyEntity supplyEntity = supplyEntityMapper.toSupplyEntity(supply);
         supplyRepository.save(supplyEntity);
+    }
+
+    @Override
+    public Optional<Date> getNextSupplyDate(Long itemId) {
+        return supplyRepository.getSupplyDateWithItemId(itemId);
     }
 }

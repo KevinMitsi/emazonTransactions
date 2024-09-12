@@ -7,6 +7,8 @@ import com.kevin.emazon_transacciones.domain.api.ISupplyServicePort;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 @AllArgsConstructor
 public class SupplyHandlerImpl implements ISupplyHandler {
@@ -16,5 +18,10 @@ public class SupplyHandlerImpl implements ISupplyHandler {
     @Override
     public void createSupply(SupplyDto supplyDto) {
         supplyServicePort.createSupply(supplyDtoMapper.supplyDtoToSupply(supplyDto));
+    }
+
+    @Override
+    public Date getNextSupplyDateFromItemId(Long itemId) {
+        return supplyServicePort.getNextSupplyDate(itemId);
     }
 }
