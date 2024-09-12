@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 @Setter
 @Validated
@@ -28,5 +30,9 @@ public class SupplyController {
         supplyDto.setWareHouseWorkerId((Long) SecurityContextHolder.getContext().getAuthentication().getDetails());
         supplyHandler.createSupply(supplyDto);
         return ResponseEntity.status(200).body(CREATE_SUPPLY_MESSAGE + supplyDto.getItemId());
+    }
+    @GetMapping("supplyDate/{id}")
+    public Date getSupplyItemDate(@PathVariable Long id){
+        return null;
     }
 }
