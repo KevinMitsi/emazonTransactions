@@ -4,6 +4,7 @@ import com.kevin.emazon_transacciones.application.dto.ExceptionResponseDto;
 import com.kevin.emazon_transacciones.infraestucture.exception.FeignRequestException;
 import com.kevin.emazon_transacciones.infraestucture.exception.FeignServerException;
 import com.kevin.emazon_transacciones.infraestucture.exception.ItemNotAvaibleException;
+import com.kevin.emazon_transacciones.infraestucture.exception.NotFoundDateWithItemId;
 import feign.FeignException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,5 +35,10 @@ public class HandlerInterceptor {
     public ResponseEntity<ExceptionResponseDto> handleFeignException(FeignException ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ExceptionResponseDto(FEIGN_EXCEPTION_MESSAGE,ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    @ExceptionHandler(NotFoundDateWithItemId.class)
+    public ResponseEntity<ExceptionResponseDto> inCaseThrowingNotFoundWithItemId(Exception e){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponseDto(e.getClass().getName(), e.getMessage(), HttpStatus.BAD_REQUEST));
     }
 }
