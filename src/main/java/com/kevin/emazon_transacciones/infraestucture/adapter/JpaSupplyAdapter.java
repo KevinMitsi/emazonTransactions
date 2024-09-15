@@ -7,6 +7,7 @@ import com.kevin.emazon_transacciones.infraestucture.mapper.ISupplyEntityMapper;
 import com.kevin.emazon_transacciones.infraestucture.repository.SupplyRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Optional;
@@ -17,12 +18,14 @@ public class JpaSupplyAdapter implements ISupplyPersistentPort {
     private final SupplyRepository supplyRepository;
     private final ISupplyEntityMapper supplyEntityMapper;
     @Override
+    @Transactional
     public void createSupply(Supply supply) {
         SupplyEntity supplyEntity = supplyEntityMapper.toSupplyEntity(supply);
         supplyRepository.save(supplyEntity);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Date> getNextSupplyDate(Long itemId) {
         return supplyRepository.getSupplyDateWithItemId(itemId);
     }
