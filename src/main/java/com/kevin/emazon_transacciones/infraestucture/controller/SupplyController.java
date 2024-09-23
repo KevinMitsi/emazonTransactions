@@ -27,7 +27,6 @@ public class SupplyController {
     @PostMapping("/new")
     @Secured(ROLE_AUX_BODEGA)
     public ResponseEntity<String> createNewSupply(@Valid @RequestBody SupplyDto supplyDto){
-        supplyDto.setWareHouseWorkerId((Long) SecurityContextHolder.getContext().getAuthentication().getDetails());
         supplyHandler.createSupply(supplyDto);
         return ResponseEntity.status(200).body(CREATE_SUPPLY_MESSAGE + supplyDto.getItemId());
     }

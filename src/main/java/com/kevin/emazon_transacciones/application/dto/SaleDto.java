@@ -18,17 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class SaleDto {
 
-    private static final String ID_NULL_MESSAGE = "El id no puede ser null";
     private static final String ITEM_ID_NULL_MESSAGE = "El id del item no puede ser null";
-    private static final String NULL_DATE_MESSAGE = "La fecha de venta no puede ser null";
-    private static final String FUTURE_DATE_MESSAGE = "La fecha de compra no puede ser en el futuro";
-    private static final String NULL_PRICE_MESSAGE = "El valor de venta no puede ser null";
-    private static final String NEGATIVE_OR_ZERO_PRICE_MESSAGE = "El valor de venta debe ser positivo";
-    private static final String NULL_STATUS_MESSAGE = "El estatus de venta no puede ser null";
-
-
-    @NotNull(message = ID_NULL_MESSAGE)
-    private Long userId;
 
     @NotNull(message = ITEM_ID_NULL_MESSAGE)
     private List<SaleItemDto> saleItemsDto;
