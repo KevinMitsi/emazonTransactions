@@ -39,10 +39,6 @@ public class SupplyDto {
     @PastOrPresent(message = BAD_DATE_MESSAGE)
     private Date supplyDate;
 
-    @NotNull(message = NULL_WH_ID_MESSAGE)
-    @Positive(message = NEGATIVE_WH_ID_MESSAGE)
-    private Long wareHouseWorkerId;
-
     @NotNull(message = NULL_PRICE_MESSAGE)
     @Positive(message = NEGATIVE_PRICE_MESSAGE)
     private Double price;

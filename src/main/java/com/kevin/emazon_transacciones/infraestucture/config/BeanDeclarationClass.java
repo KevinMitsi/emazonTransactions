@@ -3,6 +3,7 @@ package com.kevin.emazon_transacciones.infraestucture.config;
 import com.kevin.emazon_transacciones.domain.api.ISaleServicePort;
 import com.kevin.emazon_transacciones.domain.api.ISupplyServicePort;
 import com.kevin.emazon_transacciones.domain.spi.ISalePersistentPort;
+import com.kevin.emazon_transacciones.domain.spi.ISecurityContextPort;
 import com.kevin.emazon_transacciones.domain.spi.ISupplyPersistentPort;
 import com.kevin.emazon_transacciones.domain.spi.external.IStockConnectionPort;
 import com.kevin.emazon_transacciones.domain.usecase.SaleUseCase;
@@ -13,11 +14,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanDeclarationClass {
     @Bean
-    ISupplyServicePort getSupplServicePort(ISupplyPersistentPort supplyPersistentPort, IStockConnectionPort stockConnectionPort){
-        return new SupplyUseCase(supplyPersistentPort, stockConnectionPort);
+    ISupplyServicePort getSupplServicePort(ISupplyPersistentPort supplyPersistentPort, IStockConnectionPort stockConnectionPort, ISecurityContextPort securityContextPort){
+        return new SupplyUseCase(supplyPersistentPort, stockConnectionPort, securityContextPort);
     }
     @Bean
-    ISaleServicePort saleServicePort(ISalePersistentPort salePersistentPort, IStockConnectionPort stockConnectionPort){
-        return new SaleUseCase(salePersistentPort, stockConnectionPort);
+    ISaleServicePort saleServicePort(ISalePersistentPort salePersistentPort, IStockConnectionPort stockConnectionPort, ISecurityContextPort securityContextPort){
+        return new SaleUseCase(salePersistentPort, stockConnectionPort, securityContextPort);
     }
 }
