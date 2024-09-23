@@ -2,7 +2,7 @@ package com.kevin.emazon_transacciones.domain.usecase;
 
 import com.kevin.emazon_transacciones.domain.model.Supply;
 import com.kevin.emazon_transacciones.domain.spi.ISupplyPersistentPort;
-import com.kevin.emazon_transacciones.domain.spi.feign.IStockConnectionPort;
+import com.kevin.emazon_transacciones.domain.spi.external.IStockConnectionPort;
 import com.kevin.emazon_transacciones.infraestucture.exception.ItemNotAvaibleException;
 import com.kevin.emazon_transacciones.infraestucture.exception.NotFoundDateWithItemId;
 import org.junit.jupiter.api.BeforeEach;

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,17 +31,10 @@ public class SaleDto {
     private Long userId;
 
     @NotNull(message = ITEM_ID_NULL_MESSAGE)
-    private Long itemId;
+    private List<SaleItemDto> saleItemsDto;
 
-    @NotNull(message = NULL_DATE_MESSAGE)
-    @PastOrPresent(message = FUTURE_DATE_MESSAGE)
     private Date saleDate;
 
-    @NotNull(message = NULL_PRICE_MESSAGE)
-    @Positive(message = NEGATIVE_OR_ZERO_PRICE_MESSAGE)
-    private Double price;
-
-    @NotNull(message = NULL_STATUS_MESSAGE)
     private PaymentStatus paymentStatus;
 
 }
