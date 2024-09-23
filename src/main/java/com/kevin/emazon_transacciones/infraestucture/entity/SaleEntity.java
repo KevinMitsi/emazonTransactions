@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,14 +20,28 @@ public class SaleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Long userId;
 
-    private Long itemId;
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "sale_item_id", nullable = false)
+    private List<SaleItemEntity> saleItemDetails;
 
+    @Column(nullable = false)
     private Date saleDate;
 
-    private Double price;
+    @Column(nullable = false)
+    private Double total;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
+
+    public void calculateTotalPrice(){
+        Double price = 0d;
+        for (SaleItemEntity saleItem : saleItemDetails){
+            price+=saleItem.getUnitPrice();
+        }
+        setTotal(price);
+    }
 }
