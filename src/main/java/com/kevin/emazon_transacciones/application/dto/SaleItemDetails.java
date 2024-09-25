@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SaleItemDto {
+public class SaleItemDetails {
     @NotNull
     private Long itemId;
     @NotNull

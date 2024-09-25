@@ -5,6 +5,7 @@ import com.kevin.emazon_transacciones.domain.api.ISupplyServicePort;
 import com.kevin.emazon_transacciones.domain.spi.ISalePersistentPort;
 import com.kevin.emazon_transacciones.domain.spi.ISecurityContextPort;
 import com.kevin.emazon_transacciones.domain.spi.ISupplyPersistentPort;
+import com.kevin.emazon_transacciones.domain.spi.external.IReportConnectionPort;
 import com.kevin.emazon_transacciones.domain.spi.external.IStockConnectionPort;
 import com.kevin.emazon_transacciones.domain.usecase.SaleUseCase;
 import com.kevin.emazon_transacciones.domain.usecase.SupplyUseCase;
@@ -18,7 +19,7 @@ public class BeanDeclarationClass {
         return new SupplyUseCase(supplyPersistentPort, stockConnectionPort, securityContextPort);
     }
     @Bean
-    ISaleServicePort saleServicePort(ISalePersistentPort salePersistentPort, IStockConnectionPort stockConnectionPort, ISecurityContextPort securityContextPort){
-        return new SaleUseCase(salePersistentPort, stockConnectionPort, securityContextPort);
+    ISaleServicePort saleServicePort(ISalePersistentPort salePersistentPort, IStockConnectionPort stockConnectionPort, ISecurityContextPort securityContextPort, IReportConnectionPort reportConnectionPort){
+        return new SaleUseCase(salePersistentPort, stockConnectionPort, securityContextPort, reportConnectionPort);
     }
 }

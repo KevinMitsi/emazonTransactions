@@ -28,7 +28,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(1L);
         supplyDto.setQuantity(100L);
         supplyDto.setSupplyDate(new Date());
-        supplyDto.setWareHouseWorkerId(1L);
         supplyDto.setPrice(1000.0);
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);
@@ -41,7 +40,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(null);  // ItemId nulo
         supplyDto.setQuantity(100L);
         supplyDto.setSupplyDate(new Date());
-        supplyDto.setWareHouseWorkerId(1L);
         supplyDto.setPrice(1000.0);
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);
@@ -55,7 +53,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(-1L);  // ItemId negativo
         supplyDto.setQuantity(100L);
         supplyDto.setSupplyDate(new Date());
-        supplyDto.setWareHouseWorkerId(1L);
         supplyDto.setPrice(1000.0);
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);
@@ -69,7 +66,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(1L);
         supplyDto.setQuantity(null);  // Cantidad nula
         supplyDto.setSupplyDate(new Date());
-        supplyDto.setWareHouseWorkerId(1L);
         supplyDto.setPrice(1000.0);
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);
@@ -83,7 +79,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(1L);
         supplyDto.setQuantity(-100L);  // Cantidad negativa
         supplyDto.setSupplyDate(new Date());
-        supplyDto.setWareHouseWorkerId(1L);
         supplyDto.setPrice(1000.0);
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);
@@ -97,7 +92,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(1L);
         supplyDto.setQuantity(100L);
         supplyDto.setSupplyDate(null);  // Fecha de suministro nula
-        supplyDto.setWareHouseWorkerId(1L);
         supplyDto.setPrice(1000.0);
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);
@@ -111,7 +105,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(1L);
         supplyDto.setQuantity(100L);
         supplyDto.setSupplyDate(new Date(System.currentTimeMillis() + 86400000L));  // Fecha futura
-        supplyDto.setWareHouseWorkerId(1L);
         supplyDto.setPrice(1000.0);
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);
@@ -125,7 +118,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(1L);
         supplyDto.setQuantity(100L);
         supplyDto.setSupplyDate(new Date());
-        supplyDto.setWareHouseWorkerId(null);  // ID del trabajador nulo
         supplyDto.setPrice(1000.0);
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);
@@ -139,7 +131,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(1L);
         supplyDto.setQuantity(100L);
         supplyDto.setSupplyDate(new Date());
-        supplyDto.setWareHouseWorkerId(-1L);  // ID del trabajador negativo
         supplyDto.setPrice(1000.0);
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);
@@ -153,7 +144,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(1L);
         supplyDto.setQuantity(100L);
         supplyDto.setSupplyDate(new Date());
-        supplyDto.setWareHouseWorkerId(1L);
         supplyDto.setPrice(null);  // Precio nulo
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);
@@ -167,7 +157,6 @@ class SupplyDtoTest {
         supplyDto.setItemId(1L);
         supplyDto.setQuantity(100L);
         supplyDto.setSupplyDate(new Date());
-        supplyDto.setWareHouseWorkerId(1L);
         supplyDto.setPrice(-100.0);  // Precio negativo
 
         Set<ConstraintViolation<SupplyDto>> violations = validator.validate(supplyDto);

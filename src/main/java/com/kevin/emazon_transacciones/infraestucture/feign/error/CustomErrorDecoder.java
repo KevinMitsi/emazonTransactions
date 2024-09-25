@@ -13,13 +13,13 @@ public class CustomErrorDecoder implements ErrorDecoder {
     private final ErrorDecoder defaultDecoder = new ErrorDecoder.Default();
 
     @Override
-    public Exception decode(String methodKey, Response response) {
+    public RuntimeException decode(String methodKey, Response response) {
 
         if (response.status() >= 400 && response.status() < 500) {
-            return new FeignRequestException(FEIGN_REQUEST_EXCEPTION_MESSAGE + response.reason());
+            return new FeignRequestException(FEIGN_REQUEST_EXCEPTION_MESSAGE + response.reason() + response.body());
         } else if (response.status() >= 500) {
             return new FeignServerException(FEIGN_SERVER_EXCEPTION_MESSAGE + response.reason());
         }
-        return defaultDecoder.decode(methodKey, response);
+        return (RuntimeException) defaultDecoder.decode(methodKey, response);
     }
 }

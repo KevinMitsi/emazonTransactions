@@ -33,8 +33,8 @@ public class HandlerInterceptor {
     }
     @ExceptionHandler(FeignException.class)
     public ResponseEntity<ExceptionResponseDto> handleFeignException(FeignException ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ExceptionResponseDto(FEIGN_EXCEPTION_MESSAGE,ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ExceptionResponseDto(FEIGN_EXCEPTION_MESSAGE,ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
     }
 
     @ExceptionHandler(NotFoundDateWithItemId.class)

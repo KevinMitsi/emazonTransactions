@@ -1,7 +1,7 @@
 package com.kevin.emazon_transacciones.application.handler;
 
-import com.kevin.emazon_transacciones.application.dto.SaleDto;
+import com.kevin.emazon_transacciones.application.dto.SaleRequest;
 
 public interface ISaleHandler {
-    void createSale(SaleDto saleDto);
+    void createSale(SaleRequest saleDto);
 }
