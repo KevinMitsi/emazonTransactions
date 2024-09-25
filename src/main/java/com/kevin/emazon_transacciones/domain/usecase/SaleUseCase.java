@@ -3,8 +3,10 @@ package com.kevin.emazon_transacciones.domain.usecase;
 import com.kevin.emazon_transacciones.domain.api.ISaleServicePort;
 import com.kevin.emazon_transacciones.domain.model.Sale;
 import com.kevin.emazon_transacciones.domain.model.SaleItem;
+import com.kevin.emazon_transacciones.domain.model.external.SaleReport;
 import com.kevin.emazon_transacciones.domain.spi.ISalePersistentPort;
 import com.kevin.emazon_transacciones.domain.spi.ISecurityContextPort;
+import com.kevin.emazon_transacciones.domain.spi.external.IReportConnectionPort;
 import com.kevin.emazon_transacciones.domain.spi.external.IStockConnectionPort;
 import com.kevin.emazon_transacciones.infraestucture.exception.NotEnoughQuantityInStock;
 
@@ -15,11 +17,13 @@ public class SaleUseCase implements ISaleServicePort {
     private final ISalePersistentPort salePersistentPort;
     private final IStockConnectionPort stockConnectionPort;
     private final ISecurityContextPort securityContextPort;
+    private final IReportConnectionPort reportConnectionPort;
 
-    public SaleUseCase(ISalePersistentPort salePersistentPort, IStockConnectionPort stockConnectionPort, ISecurityContextPort securityContextPort) {
+    public SaleUseCase(ISalePersistentPort salePersistentPort, IStockConnectionPort stockConnectionPort, ISecurityContextPort securityContextPort, IReportConnectionPort reportConnectionPort) {
         this.salePersistentPort = salePersistentPort;
         this.stockConnectionPort = stockConnectionPort;
         this.securityContextPort = securityContextPort;
+        this.reportConnectionPort = reportConnectionPort;
     }
 
     @Override
@@ -28,6 +32,11 @@ public class SaleUseCase implements ISaleServicePort {
         validateIfItemsHaveStock(sale.getSaleItems());
         getItemsUnitPrice(sale.getSaleItems());
         salePersistentPort.createSale(sale);
+        createSaleReport(sale);
+    }
+
+    private void createSaleReport(Sale sale) {
+        reportConnectionPort.saveSaleReport(new SaleReport(securityContextPort.userEmail(),sale.getSaleItems(),sale.getSaleDate()));
     }
 
 
@@ -38,6 +47,7 @@ public class SaleUseCase implements ISaleServicePort {
             }
         });
     }
+
     private void getItemsUnitPrice(List<SaleItem> saleItems) {
         saleItems.forEach(saleItem -> saleItem.setUnitPrice(stockConnectionPort.getPriceByItemId(saleItem.getItemId())));
     }

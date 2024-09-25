@@ -1,6 +1,6 @@
 package com.kevin.emazon_transacciones.application.mapper;
 
-import com.kevin.emazon_transacciones.application.dto.SaleItemDto;
+import com.kevin.emazon_transacciones.application.dto.SaleItemDetails;
 import com.kevin.emazon_transacciones.domain.model.SaleItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -9,5 +9,5 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface ISaleItemDtoMapper {
-    SaleItem saleItemDtoToSaleItem(SaleItemDto saleItemDto);
+    SaleItem saleItemDtoToSaleItem(SaleItemDetails saleItemDetails);
 }

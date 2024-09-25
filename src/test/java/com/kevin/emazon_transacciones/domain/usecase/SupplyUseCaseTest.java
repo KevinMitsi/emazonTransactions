@@ -1,6 +1,7 @@
 package com.kevin.emazon_transacciones.domain.usecase;
 
 import com.kevin.emazon_transacciones.domain.model.Supply;
+import com.kevin.emazon_transacciones.domain.spi.ISecurityContextPort;
 import com.kevin.emazon_transacciones.domain.spi.ISupplyPersistentPort;
 import com.kevin.emazon_transacciones.domain.spi.external.IStockConnectionPort;
 import com.kevin.emazon_transacciones.infraestucture.exception.ItemNotAvaibleException;
@@ -25,7 +26,8 @@ class SupplyUseCaseTest {
     void setUp() {
         supplyPersistentPort = Mockito.mock(ISupplyPersistentPort.class);
         stockConnectionPort = Mockito.mock(IStockConnectionPort.class);
-        supplyUseCase = new SupplyUseCase(supplyPersistentPort, stockConnectionPort);
+        ISecurityContextPort securityContextPort = Mockito.mock(ISecurityContextPort.class);
+        supplyUseCase = new SupplyUseCase(supplyPersistentPort, stockConnectionPort, securityContextPort);
     }
 
     @Test

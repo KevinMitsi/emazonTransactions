@@ -8,4 +8,5 @@ public interface IStockConnectionPort {
     boolean isEnoughStock(Long itemId, Long quantity);
 
     Double getPriceByItemId(Long itemId);
+
 }
