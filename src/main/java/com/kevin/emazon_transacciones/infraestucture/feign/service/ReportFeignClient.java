@@ -11,4 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface ReportFeignClient {
     @PostMapping("new/sale")
     void addSaleToReports(@RequestBody SaleReport sale);
+
+
 }

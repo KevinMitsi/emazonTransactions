@@ -1,5 +1,6 @@
 package com.kevin.emazon_transacciones.domain.model.external;
 
+import com.kevin.emazon_transacciones.domain.model.PaymentStatus;
 import com.kevin.emazon_transacciones.domain.model.SaleItem;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,10 +18,12 @@ public class SaleReport {
     private List<SaleItem> saleItems;
 
     private Date saleDate;
+    private PaymentStatus paymentStatus;
 
-    public SaleReport(String user, List<SaleItem> saleItems, Date saleDate) {
+    public SaleReport(String user, List<SaleItem> saleItems, PaymentStatus paymentStatus,Date saleDate) {
         this.user = user;
         this.saleItems = saleItems;
+        this.paymentStatus = paymentStatus;
         this.saleDate = saleDate;
     }
 

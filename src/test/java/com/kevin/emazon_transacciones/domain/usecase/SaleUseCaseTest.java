@@ -2,14 +2,17 @@ package com.kevin.emazon_transacciones.domain.usecase;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.kevin.emazon_transacciones.domain.model.PaymentStatus;
 import com.kevin.emazon_transacciones.domain.model.Sale;
 import com.kevin.emazon_transacciones.domain.model.SaleItem;
+import com.kevin.emazon_transacciones.domain.model.external.SaleReport;
 import com.kevin.emazon_transacciones.domain.spi.ISalePersistentPort;
 import com.kevin.emazon_transacciones.domain.spi.ISecurityContextPort;
 import com.kevin.emazon_transacciones.domain.spi.external.IReportConnectionPort;
 import com.kevin.emazon_transacciones.domain.spi.external.IStockConnectionPort;
 import com.kevin.emazon_transacciones.infraestucture.exception.NotEnoughQuantityInStock;
 
+import com.kevin.emazon_transacciones.infraestucture.exception.SaleCreationException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -97,5 +100,57 @@ class SaleUseCaseTest {
         // Assert
         assertEquals(100.0, saleItem1.getUnitPrice());
         assertEquals(200.0, saleItem2.getUnitPrice());
+    }
+
+    @Test
+    void shouldThrowSaleCreationExceptionAndSkipFurtherMethodsOnRuntimeException() {
+        Sale sale = new Sale();
+        sale.setSaleItems(Arrays.asList(new SaleItem(1L, sale,1L, 1L,100.0)
+                , new SaleItem(2L, sale,9L,1L, 200.0)));
+
+        // Simular suficiente stock
+        when(stockConnectionPort.isEnoughStock(anyLong(), anyLong())).thenReturn(true);
+
+        // Simular RuntimeException al obtener los precios
+        doThrow(new RuntimeException()).when(stockConnectionPort).getPriceByItemId(anyLong());
+
+        // Verificar que se lanza SaleCreationException
+        assertThrows(SaleCreationException.class, () -> saleUseCase.createSale(sale));
+
+        // Verificar que no se llamó a createSale ni a createSaleReport
+        verify(salePersistentPort, never()).createSale(any(Sale.class));
+        verify(reportConnectionPort, times(1)).saveSaleReport(any(SaleReport.class));
+    }
+
+    @Test
+    void shouldSetPaymentStatusToPaidWhenSaleIsSuccessful() {
+        Sale sale = new Sale();
+        sale.setSaleItems(List.of(new SaleItem(1L, sale, 1L, 1L, 100.0)));
+
+        when(stockConnectionPort.isEnoughStock(anyLong(), anyLong())).thenReturn(true);
+        when(stockConnectionPort.getPriceByItemId(anyLong())).thenReturn(100.0);
+
+        saleUseCase.createSale(sale);
+
+        // Verificar que el estado de pago es PAID
+        assertEquals(PaymentStatus.STATUS_PAID, sale.getPaymentStatus());
+
+        // Verificar que se llamó a createSale y createSaleReport
+        verify(salePersistentPort, times(1)).createSale(any(Sale.class));
+        verify(reportConnectionPort, times(1)).saveSaleReport(any(SaleReport.class));
+    }
+
+    @Test
+    void shouldSetPaymentStatusToCancelledWhenExceptionOccurs() {
+        Sale sale = new Sale();
+        sale.setSaleItems(List.of(new SaleItem(1L, sale, 1L, 1L, 100.0)));
+
+        when(stockConnectionPort.isEnoughStock(anyLong(), anyLong())).thenReturn(true);
+
+        doThrow(new RuntimeException()).when(stockConnectionPort).getPriceByItemId(anyLong());
+
+        assertThrows(SaleCreationException.class, () -> saleUseCase.createSale(sale));
+        assertEquals(PaymentStatus.STATUS_CANCELLED, sale.getPaymentStatus());
+        verify(reportConnectionPort, times(1)).saveSaleReport(any(SaleReport.class));
     }
 }

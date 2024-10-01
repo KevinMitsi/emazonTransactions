@@ -38,10 +38,6 @@ public class SaleEntity {
     private PaymentStatus paymentStatus;
 
     public void calculateTotalPrice(){
-        Double price = 0d;
-        for (SaleItemEntity saleItem : saleItemDetails){
-            price+=saleItem.getUnitPrice();
-        }
-        setTotal(price);
+        setTotal(this.saleItemDetails.stream().mapToDouble(SaleItemEntity::getPartialPrice).sum());
     }
 }
