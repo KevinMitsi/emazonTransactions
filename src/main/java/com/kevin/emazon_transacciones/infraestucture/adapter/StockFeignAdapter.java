@@ -1,6 +1,6 @@
 package com.kevin.emazon_transacciones.infraestucture.adapter;
 
-import com.kevin.emazon_transacciones.domain.model.UpdateItemQuantityRequest;
+import com.kevin.emazon_transacciones.domain.model.external.UpdateItemQuantityRequest;
 import com.kevin.emazon_transacciones.domain.spi.external.IStockConnectionPort;
 import com.kevin.emazon_transacciones.infraestucture.feign.service.StockFeignClient;
 import lombok.RequiredArgsConstructor;

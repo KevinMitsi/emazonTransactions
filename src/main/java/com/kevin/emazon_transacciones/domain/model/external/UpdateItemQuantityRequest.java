@@ -1,4 +1,4 @@
-package com.kevin.emazon_transacciones.domain.model;
+package com.kevin.emazon_transacciones.domain.model.external;
 
 
 import lombok.Getter;

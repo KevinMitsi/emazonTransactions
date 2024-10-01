@@ -1,6 +1,6 @@
 package com.kevin.emazon_transacciones.infraestucture.feign.service;
 
-import com.kevin.emazon_transacciones.domain.model.UpdateItemQuantityRequest;
+import com.kevin.emazon_transacciones.domain.model.external.UpdateItemQuantityRequest;
 import com.kevin.emazon_transacciones.infraestucture.feign.ConfigurationFeign;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ public interface StockFeignClient {
 
     @GetMapping("isEnough/{id}/{quantity}")
     boolean isEnoughInStock(@PathVariable Long id, @PathVariable Long quantity);
-    @PostMapping("updateQuantity")
+    @PatchMapping("updateQuantity")
     void updateQuantityOfItem(@RequestBody UpdateItemQuantityRequest updateRequest);
     @GetMapping("price/{itemId}")
     Double getItemPriceByItemId(@PathVariable Long itemId);

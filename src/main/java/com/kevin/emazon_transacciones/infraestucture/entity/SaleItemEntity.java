@@ -14,7 +14,7 @@ public class SaleItemEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "sale_id", nullable = false)
+    @JoinColumn(name = "id", nullable = false)
     private SaleEntity sale;
     
     @Column(nullable = false)
